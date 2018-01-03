@@ -50,3 +50,25 @@ Derivatives
 ---
 * "you may be thinking you haven't seen derivatives since college" - YUP!
 * slope of a line representing a function
+
+More Derivative Examples
+---
+* d/da a^2 = 2a
+    * a = 2 f(a) = 4
+    * a = 2.001 f(a) = 4.004
+    * d/da a^2 = 4
+* d/da a^3 = 3a^2
+
+Computation graph
+---
+* forward propogation step (forward pass) followed by backward propogation step (backward pass)
+* organizes a computation as a sequence of steps
+
+Derivatives with a computation graph
+---
+* chain rule - if a --> v --> J, the amount dJ/da is the product of derivative dv/da and dJ/dv
+* in the code we will write dFinalOutputVar/dVar as just "dvar"
+    * represents the derivative of a final output variable with respect to various intermediate quanities
+    * dJ/dv will be "dv" and so on
+* derivative calculation with a computation graph is done through a backward pass across the computation graph, starting with the final product (J) and determining how each variable affects that final value (dJ/d_)
+* forward pass is used to compute the function we want to optimize, and then backward pass to compute the derivatives
