@@ -33,7 +33,7 @@ Logistic Regression Cost Function
     * y(hat) vs y (true y)
     * covers how well you are doing on a single training example
 * cost function - summation of loss functions over all samples (divided by m)
-    *J (w, b)
+    * J (w, b)
 
 Gradient Descent
 ---
@@ -72,3 +72,60 @@ Derivatives with a computation graph
     * dJ/dv will be "dv" and so on
 * derivative calculation with a computation graph is done through a backward pass across the computation graph, starting with the final product (J) and determining how each variable affects that final value (dJ/d_)
 * forward pass is used to compute the function we want to optimize, and then backward pass to compute the derivatives
+
+Logistic Regression Gradient Descent
+---
+
+Gradient Descent on m Examples
+---
+* vectorization is a technique that has removed the need for 2 massive for loops
+
+Vectorization
+---
+* art if getting rid of explicit for loops in your code
+    * better for large data sets
+* z = w transpose x + b
+    * w is a vector
+    * x is a vector
+* in a non vectorized implementation, you would need to for loop through both x and w
+    * vectorized allows you to do the transpose directly
+        * numpy (python library) can do this directly
+            * c = np.dot(a, b)
+                * a and b are vectors
+                * np is numpy library
+* parallel functions on a GPU/CPU are SIMD functions - single instruction multiple data
+    * GPUs are better than CPUs at SIMD functions
+
+More Vectorization Examples
+---
+* whenever possible, avoid explicit for-loops
+* numpy is the greatest!
+
+vectorizing logistic regression
+---
+* reminder:
+    * X is a (nx, m) matrix holding all of the training samples
+    * Z is a (1, m) matrix holding the z values for each sample
+        * Z = np.dot(w transpose, X) + b   
+    * A is a (1, m) matrix holding the a values for each sample
+        * programming assignment will capture how to calculate this
+
+Vectorizing Logistic Regression's Gradient Output
+---
+* dZ = A - Y = [a1-y1, a2-y2 ...]
+
+broadcasting in python
+---
+* example of a broadcast in python
+    * divide a 3x4 matrix by a 1x4 matrix
+        * python auto expands the target (1x4) matrix to fit the 3x4 (i.e. repeat the 1x4 three times)
+            * works for a row vector or a column vector
+    * (m, n) +-*/ (1, n) copies it m times to make a (m, n) matrix and then perform the operation
+        * same thing for (m, 1)
+
+a note on python/numpy vectors
+---
+* a = np.random.randn(5) returns neither a row vector or column vector
+    * return a "rank 1" array which is (5,)
+        * (5, ) is returned by a.shape
+        * rather do a = np.random.randn(5, 1)
